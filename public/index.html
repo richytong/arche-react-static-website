@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Arche Static Website</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width">
+<meta name="description" content="A static website built with Arche" />
+<link rel="canonical" href="https://my-domain.com/">
+<script src="https://unpkg.com/react@18.3.0/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@18.3.0/umd/react-dom.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/arche@0.3.10/index.js" crossorigin></script>
+<script src="/global.js" ></script>
+<link rel="stylesheet" href="/index.css" />
+</head>
+
+<body>
+<h1>Home</h1>
+<p>
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+</p>
+
+<div class="react-root">
+  <div id="click-example">
+    <h2>Click Example</h2>
+    <p>You clicked 0 times</p>
+    <button>Click me</button>
+  </div>
+</div>
+
+<script type="module">
+import ClickExample from './components/ClickExample.js'
+
+ReactDOM.hydrate(
+  ClickExample(),
+  document.getElementById('click-example').parentNode
+)
+</script>
+</body>
+
+</html>

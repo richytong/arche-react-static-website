@@ -1,0 +1,43 @@
+#!/usr/bin/env node
+
+const fs = require('fs')
+const path = require('path')
+const PageHTML = require('./lib/PageHTML')
+const config = require('./config')
+
+const {
+  domain,
+  publicDir,
+  pages,
+} = config
+
+/**
+ * @name main
+ *
+ * @synopsis
+ * ```coffeescript [specscript]
+ * main() -> Promise<>
+ * ```
+ */
+async function main() {
+  console.log('Creating public directory', publicDir)
+  await fs.promises.mkdir(`${__dirname}/${publicDir}`).catch(() => {})
+
+  for (const page of pages) {
+    const { title, description, url, filepath, scripts, stylesheets } = page
+    const fullFilepath = path.join(__dirname, publicDir, filepath)
+
+    console.log('Updating page', fullFilepath.replace(process.env.HOME, '~'))
+
+    await fs.promises.writeFile(fullFilepath, PageHTML({
+      title,
+      description,
+      url: `https://${domain}${url}`,
+      scripts,
+      stylesheets,
+      bodyHTML,
+    }))
+  }
+}
+
+main()
