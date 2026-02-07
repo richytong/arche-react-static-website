@@ -1,7 +1,7 @@
 {
-  "name": "arche-react-nodejs-website/html-server",
+  "name": "arche-react-nodejs-website/render-html",
   "version": "0.0.0",
-  "description": "HTML server",
+  "description": "Render HTML",
   "type": "module",
   "dependencies": {
     "arche": "^1.0.0",

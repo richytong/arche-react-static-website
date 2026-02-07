@@ -16,9 +16,6 @@ arche-static-website/
     config.js
     serve-local.sh
     update-pages
-    deploy-aws-s3
-    package.json
-    README.md
 ```
 
 ### [public/react/](/public/react)
@@ -66,7 +63,7 @@ Starts the local static web server.
 
 ### [update-pages](/update-pages)
 
-Synchronizes the public HTML pages in `public/` with [config.js](#configjs).
+Creates or updates the HTML pages in the public directory `public/` using the configuration file [config.js](#configjs).
 
 ### [deploy-aws-s3](/deploy-aws-s3)
 
@@ -92,7 +89,7 @@ Make changes to the scaffolding of this project (advanced). Start hacking [here]
 
 2. Clone your forked version
 
-```
+```sh
 # ssh
 git clone git@github.com:my-github-user/arche-static-website.git
 
@@ -102,13 +99,18 @@ git clone https://github.com/my-github-user/arche-static-website.git
 
 3. Install dependencies
 
-```
+```sh
 npm i
+```
+
+4. Update pages leaving the inner HTML for the react-root empty (`<div id="react-root"></div>`)
+```sh
+./update-pages
 ```
 
 4. Start the local web server
 
-```
+```sh
 ./serve-local.sh
 ```
 
@@ -116,3 +118,9 @@ npm i
 
 ![arche-static-website-home-page](https://rubico.land/assets/vanilla-static-website-home-page.jpg)
 
+## Build for production
+
+1. Update all pages including the inner HTML of the react-root.
+```sh
+./update-pages --react-root-inner-html
+```

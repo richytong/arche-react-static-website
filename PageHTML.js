@@ -1,11 +1,20 @@
+function PageHTML(options) {
+  const {
+    title,
+    description,
+    url,
+    bodyHTML,
+  } = options
+
+  return `
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Arche Static Website</title>
+  <title>${title}</title>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width">
-  <meta name="description" content="A static website built with Arche" />
-  <link rel="canonical" href="https://my-domain.com/">
+  <meta name="description" content="${description}" />
+  <link rel="canonical" href="${url}">
 
   <script src="https://unpkg.com/react@18.3.0/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@18.3.0/umd/react-dom.production.min.js"></script>
@@ -15,9 +24,12 @@
   <link rel="stylesheet" href="/index.css" />
 </head>
 
-<body><div id="react-root"><div id="react-root"><h1>Home</h1></div>
-</div></body>
+<body>${bodyHTML}</body>
 
 <script src="/index.js" type="module"></script>
 
 </html>
+  `.trim()
+}
+
+module.exports = PageHTML

@@ -2,7 +2,8 @@
 
 const fs = require('fs')
 const path = require('path')
-const PageHTML = require('./lib/PageHTML')
+const { spawn } = require('child_process')
+const PageHTML = require('./PageHTML')
 const config = require('./config')
 
 const {
@@ -11,15 +12,53 @@ const {
   pages,
 } = config
 
+function getReactRootInnerHTML(options) {
+  const { url } = options
+
+  return new Promise((resolve, reject) => {
+    const cmd = spawn('node', [`${__dirname}/render-html/index.mjs`, url], {
+      env: {
+        ...process.env,
+        NODE_ENV: process.env.NODE_ENV,
+      },
+    })
+
+    const chunks = []
+    cmd.stdout.on('data', chunk => {
+      chunks.push(chunk)
+    })
+    cmd.on('close', () => {
+      resolve(Buffer.concat(chunks))
+    })
+
+    cmd.on('error', error => {
+      reject(error)
+    })
+
+    process.on('exit', () => {
+      cmd.kill()
+    })
+  })
+}
+
 async function main() {
-  console.log('Creating public directory', publicDir)
+  const updateReactRootHtml = process.argv.includes('--react-root-inner-html')
+
   await fs.promises.mkdir(`${__dirname}/${publicDir}`).catch(() => {})
 
   for (const page of pages) {
     const { title, description, url, filepath, scripts, stylesheets } = page
     const fullFilepath = path.join(__dirname, publicDir, filepath)
 
-    console.log('Updating page', fullFilepath.replace(process.env.HOME, '~'))
+    if (updateReactRootHtml) {
+      console.log('Updating page with react-root inner HTML', fullFilepath.replace(process.env.HOME, '~'))
+    } else {
+      console.log('Updating page', fullFilepath.replace(process.env.HOME, '~'))
+    }
+
+    const bodyHTML = updateReactRootHtml
+      ? `<div id="react-root">${await getReactRootInnerHTML({ url })}</div>`
+      : '<div id="react-root"></div>'
 
     await fs.promises.writeFile(fullFilepath, PageHTML({
       title,
