@@ -1,13 +1,5 @@
 const { Div, H2, P, Button } = ReactElement
 
-/**
- * @name ClickExample
- *
- * @synopsis
- * ```coffeescript [specscript]
- * ClickExample() -> ReactElement
- * ```
- */
 const ClickExample = ReactElement(() => {
   const [count, setCount] = useState(0)
 

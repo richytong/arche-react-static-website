@@ -1,16 +1,5 @@
 import TodoCardElements from './TodoCardElements.js'
 
-/**
- * @name LoadMoreButton
- *
- * @synopsis
- * ```coffeescript [specscript]
- * LoadMoreButton(options {
- *   todos: Array<{}>,
- *   todosListElement: Element,
- * }) -> loadMoreButton Element
- * ```
- */
 function LoadMoreButton(options) {
   const {
     todos,
