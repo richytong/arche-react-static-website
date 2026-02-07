@@ -5,18 +5,21 @@ Quickstart project for a static website using Arche and React.js.
 
 ```
 arche-static-website/
-    lib/
-        README.md
     public/
         react/
             ClickExample.js
         global.js
         index.css
         index.html
+    render-html/
     config.js
+    PageHTML.js
     serve-local.sh
     update-pages
 ```
+
+### [public/](/public)
+The public directory. All files in this directory are made public to the internet. This directory is the root of the public website.
 
 ### [public/react/](/public/react)
 
@@ -24,7 +27,7 @@ Put [React](https://react.dev/) components in this directory.
 
 ### [public/global.js](/public/global.js)
 
-JavaScript in this file is run at the top of all HTML `.html` files in [config.publicDir](#configpublicdir). Define global variables and functions in this file, e.g. `window.myVariable = 1`.
+JavaScript in this file is run at the top of all HTML `.html` files. Define global variables and functions in this file, e.g. `window.myVariable = 1`.
 
 ### [public/index.css](/public/index.css)
 
@@ -33,6 +36,10 @@ The default CSS file.
 ### [public/index.html](/public/index.html)
 
 This page is served to requests for the home page `/`.
+
+### [render-html/](/render-html)
+
+The render-html process. `render-html` is a Node.js process using the ECMAScript module system that imports the client React application root `Root.js` to generate and output HTML.
 
 ### [config.js](/config.js)
 
@@ -56,6 +63,15 @@ A list of objects that specify the website's pages. Each object has four propert
   * `filepath` - the location of the page within [config.publicDir](#configpublicdir)
   * `scripts` - A list of [script tags](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/script) that will be loaded by the page.
   * `stylesheets` - A list of stylesheet [link tags](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/link) that will be loaded by the page.
+
+### [PageHtml.js](/PageHtml.js)
+Returns the HTML for all pages. Contains all client-side dependencies.
+
+`PageHtml` options:
+  * `title` - the title of the page.
+  * `description` - the description of the page.
+  * `url` - the canonical URL of the page.
+  * `reactRootHTML` - the page-specific HTML received from the render-html process. Includes the `<div id="react-root">...</div>` tag and all children.
 
 ### [serve-local.sh](/serve-local.sh)
 
