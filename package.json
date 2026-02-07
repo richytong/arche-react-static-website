@@ -1,6 +1,9 @@
 {
-  "name": "arche-react-nodejs-website/html-server",
+  "name": "arche-react-static-website",
   "version": "0.0.0",
-  "description": "HTML server",
-  "type": "module"
+  "description": "Quickstart project for a static website using Arche and React.",
+  "repository": {
+    "type": "git",
+    "url": "github.com/richytong/arche-react-static-website"
+  }
 }
