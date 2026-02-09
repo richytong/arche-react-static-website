@@ -1,4 +1,4 @@
-function PageHTML(options) {
+function PageHtml(options) {
   const {
     title,
     description,
@@ -32,4 +32,4 @@ function PageHTML(options) {
   `.trim()
 }
 
-module.exports = PageHTML
+module.exports = PageHtml

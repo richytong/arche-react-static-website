@@ -13,7 +13,7 @@ arche-static-website/
         index.html
     render-html/
     config.js
-    PageHTML.js
+    PageHtml.js
     serve-local.sh
     update-pages
 ```

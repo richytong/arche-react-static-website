@@ -3,7 +3,7 @@
 const fs = require('fs')
 const path = require('path')
 const { spawn } = require('child_process')
-const PageHTML = require('./PageHTML')
+const PageHtml = require('./PageHtml')
 const config = require('./config')
 
 const {
@@ -60,7 +60,7 @@ async function main() {
       ? `<div id="react-root">${await getReactRootInnerHTML({ url })}</div>`
       : '<div id="react-root"></div>'
 
-    await fs.promises.writeFile(fullFilepath, PageHTML({
+    await fs.promises.writeFile(fullFilepath, PageHtml({
       title,
       description,
       url: `https://${domain}${url}`,
